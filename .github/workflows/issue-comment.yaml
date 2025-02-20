@@ -1,15 +1,47 @@
-name: Create a comment on new issue
+# name: Create a comment on new issue
+
+# on:
+#   issues:
+#     types: [opened]
+
+# jobs:
+#   content-with-action:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: "Dump GitHub context"
+#         run: |
+#           sudo apt-get update && sudo apt-get install -y jq
+#           echo '${{ toJSON(github.event) }}' | jq
+#         shell: bash
+
+
+### 2nd action
+
+name: Create a Comment on New Issue
 
 on:
   issues:
     types: [opened]
 
 jobs:
-  content-with-action:
+  add_comment:
     runs-on: ubuntu-latest
+
     steps:
-      - name: "Dump GitHub context"
+      - name: Dump GitHub Context
         run: |
-          sudo apt-get update && sudo apt-get install -y jq
           echo '${{ toJSON(github.event) }}' | jq
         shell: bash
+
+      - name: Create Comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            👋 Hello @${{ github.event.issue.user.login }},
+            Thanks for opening this issue! 🚀  
+            - This is a multi-line test comment  
+            - With GitHub **Markdown** ✨  
+            - Created by [create-or-update-comment](https://github.com/peter-evans/create-or-update-comment)  
+          reactions: "+1"
+

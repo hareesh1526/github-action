@@ -17,6 +17,34 @@
 
 ### 2nd action
 
+# name: Create a Comment on New Issue
+
+# on:
+#   issues:
+#     types: [opened]
+
+# jobs:
+#   add_comment:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Dump GitHub Context
+#         run: |
+#           echo '${{ toJSON(github.event) }}' | jq
+#         shell: bash
+
+#       - name: Create Comment
+#         uses: peter-evans/create-or-update-comment@v4
+#         with:
+#           issue-number: ${{ github.event.issue.number }}
+#           body: |
+#             👋 Hello @${{ github.event.issue.user.login }},
+#             Thanks for opening this issue! 🚀  
+#             - This is a multi-line test comment  
+#             - With GitHub **Markdown** ✨  
+#             - Created by [create-or-update-comment](https://github.com/peter-evans/create-or-update-comment)  
+#           reactions: "+1"
+
 name: Create a Comment on New Issue
 
 on:
@@ -38,10 +66,11 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            👋 Hello @${{ github.event.issue.user.login }},
-            Thanks for opening this issue! 🚀  
-            - This is a multi-line test comment  
-            - With GitHub **Markdown** ✨  
-            - Created by [create-or-update-comment](https://github.com/peter-evans/create-or-update-comment)  
+            👋 Hello @${{ github.event.issue.user.login }}!  
+            Thanks for opening this issue. 🚀  
+            We appreciate your contribution and will review it soon.  
+            ---
+            **Helpful Links:**  
+            - [GitHub Docs](https://docs.github.com)  
+            - [Our Contribution Guidelines](https://github.com/your-repo/CONTRIBUTING.md)  
           reactions: "+1"
-

@@ -61,16 +61,13 @@ jobs:
           echo '${{ toJSON(github.event) }}' | jq
         shell: bash
 
-      - name: Create Comment
+      - name: Create Comment on Issue #3
         uses: peter-evans/create-or-update-comment@v4
         with:
-          issue-number: ${{ github.event.issue.number }}
+          issue-number: 3
           body: |
             👋 Hello @${{ github.event.issue.user.login }}!  
-            Thanks for opening this issue. 🚀  
+            Thanks for opening Issue #3. 🚀  
             We appreciate your contribution and will review it soon.  
-            ---
-            **Helpful Links:**  
-            - [GitHub Docs](https://docs.github.com)  
-            - [Our Contribution Guidelines](https://github.com/your-repo/CONTRIBUTING.md)  
           reactions: "+1"
+
